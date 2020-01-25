@@ -31,17 +31,23 @@ class Scene2 extends Phaser.Scene {
       repeat: -1
     });
 
-    // this.anims.create({
-    //   key: "explode",
-    //   frames: this.anims.generateFrameNumbers("explosion"),
-    //   frameRate: 20,
-    //   repeat: 0,
-    //   hideOnComplete: true
-    // });
+    this.anims.create({
+      key: "explode",
+      frames: this.anims.generateFrameNumbers("explosion"),
+      frameRate: 20,
+      repeat: 0,
+      hideOnComplete: true
+    });
 
     this.ship1.play("ship1_anim", true);
     this.ship2.play("ship2_anim", true);
     this.ship3.play("ship3_anim", true);
+
+    this.ship1.setInteractive();
+    this.ship2.setInteractive();
+    this.ship3.setInteractive();
+
+    this.input.on('gameobjectdown', this.destroyShip, this);
 
     this.add.text(20, 20, "Playing Game", { 
       font: "25px Arial",
@@ -68,5 +74,10 @@ class Scene2 extends Phaser.Scene {
     ship.y = 0;
     let randomX = Phaser.Math.Between(0, config.width);
     ship.x = randomX;
+  }
+
+  destroyShip(pointer, gameObject) {
+    gameObject.setTexture("explosion");
+    gameObject.play("explode");
   }
 }
