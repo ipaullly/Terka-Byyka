@@ -64,6 +64,7 @@ class Scene2 extends Phaser.Scene {
 
     if (Phaser.Input.Keyboard.JustDown(this.spacebar)) {
       console.log("Fire!");
+      this.shootBeam();
     }
 
   }
@@ -98,5 +99,9 @@ class Scene2 extends Phaser.Scene {
     } else if (this.cursorKeys.up.isDown) {
       this.player.y -= gameSettings.playerSpeed;
     }
+  }
+
+  shootBeam(){
+    let beam = new Beam(this);
   }
 }
