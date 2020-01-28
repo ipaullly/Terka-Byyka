@@ -10,6 +10,11 @@ class Scene2 extends Phaser.Scene {
     this.ship2 = this.add.sprite(config.width/2, config.height/2, "ship2");
     this.ship3 = this.add.sprite(config.width/2 + 50, config.height/2, "ship3");
 
+    this.enemies = this.physics.add.group();
+    this.enemies.add(this.ship1);
+    this.enemies.add(this.ship2);
+    this.enemies.add(this.ship3);
+
     this.ship1.play("ship1_anim", true);
     this.ship2.play("ship2_anim", true);
     this.ship3.play("ship3_anim", true);
@@ -51,6 +56,17 @@ class Scene2 extends Phaser.Scene {
 
     this.cursorKeys = this.input.keyboard.createCursorKeys();
     this.spacebar = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.SPACE);
+    this.projectiles = this.add.group({
+      classType: Beam,
+      maxSize: 10,
+      runChildUpdate: true
+    });
+    this.physics.add.collider(this.projectiles, this.powerUps, (projectile, powerUp) => {
+      projectile.destroy();
+    });
+    this.physics.add.overlap(this.player, this.powerUps, this.pickPowerUp, null, this);
+    this.physics.add.overlap(this.player, this.enemies, this.hurtPlayer, null, this);
+    this.physics.add.overlap(this.projectiles, this.enemies, this.hitEnemy, null, this);
   }
 
   update() {
@@ -66,7 +82,6 @@ class Scene2 extends Phaser.Scene {
       console.log("Fire!");
       this.shootBeam();
     }
-
   }
 
   moveShip(ship, speed) {
@@ -103,5 +118,20 @@ class Scene2 extends Phaser.Scene {
 
   shootBeam(){
     let beam = new Beam(this);
+  }
+
+  pickPowerUp(player, powerUp) {
+    powerUp.disableBody(true, true);
+  }
+
+  hurtPlayer(player, enemy) {
+    this.resetShipPos(enemy);
+    player.x = config.width / 2 - 8;
+    player.y = config.height - 64;
+  }
+
+  hitEnemy(projectile, enemy) {
+    projectile.destroy();
+    this.resetShipPos(enemy);
   }
 }
