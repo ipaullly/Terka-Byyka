@@ -25,11 +25,6 @@ class Scene2 extends Phaser.Scene {
 
     this.input.on('gameobjectdown', this.destroyShip, this);
 
-    this.add.text(20, 20, "Playing Game", { 
-      font: "25px Arial",
-      fill: "yellow"
-    });
-
     this.powerUps = this.physics.add.group();
 
     let maxObjects = 4;
