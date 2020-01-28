@@ -30,8 +30,8 @@ class Scene1 extends Phaser.Scene {
       frameHeight: 156,
     });
     this.load.spritesheet("beam", "spritesheets/beam.png", {
-      frameWidth: 500,
-      frameHeight: 890,
+      frameWidth: 16,
+      frameHeight: 20,
     });
   }
 
@@ -91,13 +91,6 @@ class Scene1 extends Phaser.Scene {
         end: 8
       }),
       frameRate: 9,
-      repeat: -1
-    });
-
-    this.anims.create({
-      key: "beam_anim",
-      frames: this.anims.generateFrameNumbers("beam"),
-      frameRate: 20,
       repeat: -1
     });
 
