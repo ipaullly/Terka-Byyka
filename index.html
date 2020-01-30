@@ -5,13 +5,44 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>Terka</title>
+  <style>
+    body, html {
+      background-color: #211e27;
+      color: #d1cfc8;
+      margin: 0px;
+      padding: 0px;
+    }
+    body {
+      overflow: hidden;
+    }
+    canvas {
+      image-rendering: optimizeSpeed;             /* legal fallback*/
+      image-rendering: -moz-crisp-edges;          /* firefox */
+      image-rendering: -o-crisp-edges;            /* Opera */
+      image-rendering: -webkit-optimize-contrast; /* Safari */
+      image-rendering: optimize-contrast;         /* CSS3 proposed*/
+      image-rendering: crisp-edges;               /* CSS4 proposed*/
+      image-rendering: pixelated;                 /* CSS4 proposed*/
+      -ms-interpolation-mode: nearest-neighbor;   /* IE8+ */
+    }
+    body, html, canvas, * {
+      -webkit-touch-callout: none;
+      -webkit-user-select: none;
+      -khtml-user-select: none;
+      -moz-user-select: none;
+      -ms-user-select: none;
+      user-select: none;
+      -webkit-text-size-adjust: none;
+      -webkit-tap-highlight-color: transparent;
+    }
+  </style>
+</head>
+<body>
+
   <script type="text/javascript" src="phaser.min.js"></script>
   <script type="text/javascript" src="Scene1.js"></script>
   <script type="text/javascript" src="Scene2.js"></script>
   <script type="text/javascript" src="game.js"></script>
   <script type="text/javascript" src="beam.js"></script>
-</head>
-<body>
-  
 </body>
 </html>

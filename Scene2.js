@@ -62,6 +62,8 @@ class Scene2 extends Phaser.Scene {
     this.physics.add.overlap(this.player, this.powerUps, this.pickPowerUp, null, this);
     this.physics.add.overlap(this.player, this.enemies, this.hurtPlayer, null, this);
     this.physics.add.overlap(this.projectiles, this.enemies, this.hitEnemy, null, this);
+
+    this.scoreLabel = this.add.bitmapText(10, 5, "pixelFont", "SCORE ", 16);
   }
 
   update() {
