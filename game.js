@@ -13,7 +13,7 @@ let config = {
     arcade: {
       debug: false
     }
-  }
+  },
 }
 
 let game = new Phaser.Game(config);

@@ -34,6 +34,8 @@ class Scene1 extends Phaser.Scene {
       frameHeight: 32,
     });
     this.load.bitmapFont("pixelFont", "assets/gd_boot.png", "assets/gd_boot.xml");
+
+    this.load.audio("music", ["assets/background.ogg", "assets/background.mp3"]);
   }
 
   create() {

@@ -76,6 +76,20 @@ class Scene2 extends Phaser.Scene {
 
     this.score = 0;
     this.scoreLabel = this.add.bitmapText(10, 5, "pixelFont", "SCORE ", 16);
+
+    this.music = this.sound.add("music");
+
+    let musicConfig = {
+      mute: false,
+      volume: 1,
+      rate: 1,
+      detune: 0,
+      seek: 0,
+      loop: true,
+      delay: 2,
+    }
+
+    this.music.play(musicConfig);
   }
 
   update() {
