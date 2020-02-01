@@ -36,6 +36,10 @@ class Scene1 extends Phaser.Scene {
     this.load.bitmapFont("pixelFont", "assets/gd_boot.png", "assets/gd_boot.xml");
 
     this.load.audio("music", ["assets/background.ogg", "assets/background.mp3"]);
+    this.load.audio("audio_explosion", ["assets/explosion.ogg", "assets/explosion.mp3"]);
+    this.load.audio("audio_beam", ["assets/beam.ogg", "assets/beam.mp3"]);
+    this.load.audio("audio_collision", ["assets/siren.ogg", "assets/siren.mp3"]);
+    this.load.audio("audio_pickup", ["assets/pickup.ogg", "assets/pickup.mp3"]);    
   }
 
   create() {

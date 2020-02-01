@@ -77,16 +77,21 @@ class Scene2 extends Phaser.Scene {
     this.score = 0;
     this.scoreLabel = this.add.bitmapText(10, 5, "pixelFont", "SCORE ", 16);
 
+    this.beamSound = this.sound.add("audio_beam");
+    this.explosionSound = this.sound.add("audio_explosion");
+    this.collisionSound = this.sound.add("audio_collision");
+    this.pickupSound = this.sound.add("audio_pickup");
     this.music = this.sound.add("music");
+    this.soundVolume = { volume: 0.4 };
 
     let musicConfig = {
       mute: false,
-      volume: 1,
+      volume: 0.3,
       rate: 1,
       detune: 0,
       seek: 0,
       loop: true,
-      delay: 2,
+      delay: 0,
     }
 
     this.music.play(musicConfig);
@@ -142,10 +147,12 @@ class Scene2 extends Phaser.Scene {
 
   shootBeam(){
     let beam = new Beam(this);
+    this.beamSound.play(this.soundVolume);
   }
 
   pickPowerUp(player, powerUp) {
     powerUp.disableBody(true, true);
+    this.pickupSound.play(this.soundVolume);
   }
 
   hurtPlayer(player, enemy) {
@@ -154,6 +161,8 @@ class Scene2 extends Phaser.Scene {
       return;
     }
     let explosion = new Explosion(this, player.x, player.y);
+    this.collisionSound.play(this.soundVolume);
+    this.adjustScore(10, false)  ;
     player.disableBody(true, true);
     this.time.addEvent({
       delay: 1000,
@@ -167,7 +176,18 @@ class Scene2 extends Phaser.Scene {
     let explosion = new Explosion(this, enemy.x, enemy.y);
     projectile.destroy();
     this.resetShipPos(enemy);
-    this.score += 15;
+    this.adjustScore(15, true);
+    this.explosionSound.play(this.soundVolume);
+  }
+
+  adjustScore(scoreValue, operation) {
+    if (operation) {
+      this.score += scoreValue;  
+    } else {
+      if(this.score > 0) { // the score isn't adjusted in case it is below zero or zero
+        this.score -= scoreValue;  
+      } 
+    }
     let scoreFormated = this.zeroPad(this.score, 6);
     this.scoreLabel.text = "SCORE: " + scoreFormated;
   }
